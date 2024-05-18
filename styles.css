@@ -5,10 +5,12 @@
     background-color: rgb(1, 1, 75);
 
 }
+
 body{
     background-color: rgb(68, 68, 153);
     color: white;
 }
+
 .row{
     display: flex;
     flex-direction: column;
@@ -17,11 +19,32 @@ body{
 .card{
     background-color: rgb(1, 1, 75);
 }
+
 .card-img-top{
     height: 20%;
     width: auto;
 }
+
 #searchForm {
     display: flex;
-    justify-content: flex-end;
-  }
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#popularPicksContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; 
+}
+h4{
+    margin-right: 5px;
+}

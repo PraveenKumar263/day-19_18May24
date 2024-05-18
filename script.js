@@ -41,41 +41,45 @@ async function handlePopularShowClick(showName) {
     }
 }
 
+// Create the card to display info
 function displayShowCard(info) {
-    const popularPicksContainer = document.getElementById("popularPicksContainer");
-    let card  = document.getElementById("showCard");
+    let card = document.getElementById("showCard");
     if (!card) {
         // Create a new card if it doesn't exist
         card = createDivElement("card col-md-8");
         card.id = "showCard";
-        popularPicksContainer.parentNode.insertBefore(card, popularPicksContainer.nextSibling);
+        const cardContainer = document.getElementById("cardContainer");
+        cardContainer.appendChild(card);
     }
+
     const scheduleDatesArr = Object.values(info.schedule.days).join(', ');
     const genres = Object.values(info.genres).join(', ');
     const country = info.network.country.name;
-    const  network = info.network.name;
+    const network = info.network.name;
     const cardContent = `
-            <img src="${info.image?.medium || ''}" class="card-img-top" alt="${info.name}">
-            <div class="card-body">
-                <h5 class="card-title">${info.name}</h5>
-                <p class="card-text">Genres: ${genres || ''}</p>
-                <p class="card-text">Premiered Date: ${info.premiered || ''}</p>
-                <p class="card-text">Schedule Days: ${ scheduleDatesArr|| ''}</p>
-                <p class="card-text">Schedule Time: ${info.schedule.time || ''}</p>
-                <p class="card-text">Rating: ${info.rating.average || ''}</p>
-                <p class="card-text">Country: ${country || ''}</p>
-                <p class="card-text">Network: ${network || ''}</p>
-                <p class="card-text">Summary: ${info.summary || ''}</p>
-
-            </div>
+        <img src="${info.image?.medium || ''}" class="card-img-top" alt="${info.name}">
+        <div class="card-body">
+            <h5 class="card-title">${info.name}</h5>
+            <p class="card-text">Genres: ${genres || ''}</p>
+            <p class="card-text">Premiered Date: ${info.premiered || ''}</p>
+            <p class="card-text">Schedule Days: ${scheduleDatesArr || ''}</p>
+            <p class="card-text">Schedule Time: ${info.schedule.time || ''}</p>
+            <p class="card-text">Rating: ${info.rating.average || ''}</p>
+            <p class="card-text">Country: ${country || ''}</p>
+            <p class="card-text">Network: ${network || ''}</p>
+            <p class="card-text">Summary: ${info.summary || ''}</p>
+        </div>
     `;
 
     card.innerHTML = cardContent;
 }
 
+
 // Basic element setup
 const container = createDivElement("container mt-2");
 const row = createDivElement("row");
+const formDiv = createDivElement("col-md-12");
+formDiv.id = "formDiv";
 const title = createDivElement("col-md-12");
 title.className = "pageTitle";
 title.innerHTML = `
@@ -97,12 +101,14 @@ popularPicks.forEach((showName, index) => {
         // Add separator between show names
         const separator = document.createElement("span");
         separator.textContent = " | ";
+        separator.style.margin = "0 5px";
         popularPicksContainer.appendChild(separator);
     }
 });
 
-// Function to create form elements and set up event listeners
+// Create form elements and set up event listeners
 function setupForm() {
+    let formContainer = document.getElementById("formDiv");
     // Create form element
     const form = document.createElement("form");
     form.id = "searchForm";
@@ -128,10 +134,10 @@ function setupForm() {
     form.appendChild(input);
     form.appendChild(button);
 
-    popularPicksContainer.appendChild(form);
+    formContainer.appendChild(form);
 }
 
-// Function to handle search button click
+// Handle search button click
 async function handleSearch() {
     const searchInput = document.getElementById("showsearch").value.trim();
     if (searchInput !== "") {
@@ -147,6 +153,10 @@ async function handleSearch() {
 // Append elements to the container
 row.appendChild(title);
 row.appendChild(popularPicksContainer);
+row.appendChild(formDiv);
+const cardContainer = createDivElement("col-md-12 card-container");
+cardContainer.id = "cardContainer";
+row.appendChild(cardContainer);
 container.appendChild(row);
 
 // Append container to the document body
