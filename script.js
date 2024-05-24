@@ -83,7 +83,7 @@ formDiv.id = "formDiv";
 const title = createDivElement("col-md-12");
 title.className = "pageTitle";
 title.innerHTML = `
-                    <h3>Trending TV Shows</h3>
+                    <h2>Trending TV Shows</h2>
                     <p>Pick your favourite</p>
 `;
 const popularPicks = ['Girls', 'The Flash', 'Fall River', 'Debris', 'Innocent'];

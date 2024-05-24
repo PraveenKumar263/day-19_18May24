@@ -1,9 +1,7 @@
 .pageTitle{
     text-align: center;
     margin-top: 5px;
-    font: 1em sans-serif;
-    background-color: rgb(1, 1, 75);
-
+    font: 2rem sans-serif;
 }
 
 body{
@@ -47,4 +45,7 @@ body{
 }
 h4{
     margin-right: 5px;
+}
+p{
+    font-size: large;
 }
